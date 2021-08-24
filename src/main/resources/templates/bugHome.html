@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Bug Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+<form th:action="@{/new}" method="post">
+    <div>
+        <br>
+        <button class="btn btn-primary" type="submit">Report Bug</button>
+    </div>
+</form>
+<div>
+<h2>Current Reported Issues</h2>
+</div>
+<table class="table">
+    <thead class="table-light">
+    <tr>
+        <th></th>
+        <th>BUG NO</th>
+        <th>BUG NAME</th>
+        <th>BUG DESCRIPTION</th>
+        <th>BUG PRIORITY</th>
+        <th>BUG STATUS</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="l : ${list1}">
+        <td><a class="btn btn-primary" th:href="@{/edit/{bugId}(bugId=${l.bugId})}" role="button">Edit</a></td>
+        <td th:text="${l.bugId}"></td>
+        <td th:text="${l.bugName}"></td>
+        <td th:text="${l.bugDescription}"></td>
+        <td th:text="${l.bugPriority}"></td>
+        <td th:text="${l.bugStatus}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

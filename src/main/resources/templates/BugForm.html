@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Add/Update Bug</title>
+</head>
+<body>
+<div class="container">
+<form class="form-control" th:action="@{/save}" th:object="${bug}" method="post">
+    <br>
+    <h3>Create/Update Issue</h3>
+    <div>
+        <input type="hidden" th:field="*{bugId}"/>
+        <div class="mb-3">
+            <label for="bugName" class="form-label">Name :</label>
+            <input type="text" class="form-control" id="bugName" th:field="*{bugName}" required>
+        </div>
+        <div class="mb-3">
+            <label for="bugDescription" class="form-label">Description :</label>
+            <textarea class="form-control" id="bugDescription" rows="3" th:field="*{bugDescription}"></textarea>
+        </div>
+
+        <label class="form-label">Priority :</label>
+        <select class="form-select" aria-label="Default select example" th:field="*{bugPriority}">
+            <option th:value="'P4'" th:text="P4"></option>
+            <option th:value="'P3'" th:text="P3"></option>
+            <option th:value="'P2'" th:text="P2"></option>
+            <option th:value="'P1'" th:text="P1"></option>
+        </select>
+        <br>
+        <label class="form-label">Status :</label>
+        <select class="form-select" aria-label="Default select example" th:field="*{bugStatus}">
+            <option th:value="'Open'" th:text="Open"></option>
+            <option th:value="'InProgress'" th:text="InProgress"></option>
+            <option th:value="'Closed'" th:text="Closed"></option>
+            <option th:value="'Deferred'" th:text="Deferred"></option>
+        </select>
+    <br>
+        <button class="btn btn-success" type="submit">Save</button>
+        <a class="btn btn-warning" th:href="@{/all}" role="button">Cancel</a>
+        <a th:if="${bug.bugId != null}" class="btn btn-danger" onclick="return confirm('Do you want to Delete this issue');" th:href="@{/delete/{id}(id=${bug.bugId})}" role="button">Delete</a>
+    </div>
+</form>
+</div>
+</body>
+</html>
